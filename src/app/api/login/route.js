@@ -41,12 +41,14 @@ export async function POST(req) {
     );
 
     // Store token in HTTP-only cookie
-    cookies().set('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60
-    });
+      const cookieStore = await cookies(); // ✅ await
+      cookieStore.set('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/',
+    maxAge: 60 * 60 * 24 // 1 day
+  });
 
     return new Response(
       JSON.stringify({ message: "Login successful", role: user.role }),

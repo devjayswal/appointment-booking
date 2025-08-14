@@ -4,14 +4,13 @@ import { requireAuth } from '@/lib/auth';
 
 export async function GET() {
   try {
-    const auth = requireAuth(['patient']);
-    if (auth.error) {
-      return new Response(JSON.stringify(auth.error), { status: auth.status });
-    }
+    // ✅ Await and pass role
+    const user = await requireAuth('patient');
 
     await connectDB();
 
-    const bookings = await Booking.find({ userId: auth.user.userId })
+    // ✅ Use user.userId directly
+    const bookings = await Booking.find({ userId: user.userId })
       .sort({ createdAt: -1 });
 
     return new Response(JSON.stringify({ bookings }), { status: 200 });

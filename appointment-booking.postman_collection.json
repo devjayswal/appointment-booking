@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Appointment Booking API",
+    "_postman_id": "6b1f9a7a-bc54-4c55-b4b4-92f6d6aa1e22",
+    "description": "Postman collection for verifying the Appointment Booking App APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"Passw0rd!\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/register", "host": ["{{baseUrl}}"], "path": ["api", "register"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"Passw0rd!\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/login", "host": ["{{baseUrl}}"], "path": ["api", "login"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Slots",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/slots", "host": ["{{baseUrl}}"], "path": ["api", "slots"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Book Slot",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"slotId\": \"2025-08-15T09:00:00.000Z\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/book", "host": ["{{baseUrl}}"], "path": ["api", "book"] }
+      },
+      "response": []
+    },
+    {
+      "name": "My Bookings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/my-bookings", "host": ["{{baseUrl}}"], "path": ["api", "my-bookings"] }
+      },
+      "response": []
+    },
+    {
+      "name": "All Bookings (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/all-bookings", "host": ["{{baseUrl}}"], "path": ["api", "all-bookings"] }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

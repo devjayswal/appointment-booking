@@ -1,25 +1,31 @@
-import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 
-export function getUserFromToken() {
-  const token = cookies().get('token')?.value;
+export async function getUserFromToken() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
   if (!token) return null;
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return decoded; // { userId, role, iat, exp }
+    return jwt.verify(token, process.env.JWT_SECRET);
   } catch {
     return null;
   }
 }
 
-export function requireAuth(roles = []) {
-  const user = getUserFromToken();
+export async function requireAuth(role) {
+  const user = await getUserFromToken();
   if (!user) {
-    return { error: { code: "UNAUTHORIZED", message: "Authentication required" }, status: 401 };
+    return {
+      error: { code: "UNAUTHORIZED", message: "You must be logged in" },
+      status: 401
+    };
   }
-  if (roles.length && !roles.includes(user.role)) {
-    return { error: { code: "FORBIDDEN", message: "Access denied" }, status: 403 };
+  if (role && user.role !== role) {
+    return {
+      error: { code: "FORBIDDEN", message: "You do not have permission to perform this action" },
+      status: 403
+    };
   }
-  return { user };
+  return user;
 }

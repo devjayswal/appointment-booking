@@ -4,10 +4,8 @@ import { requireAuth } from '@/lib/auth';
 
 export async function POST(req) {
   try {
-    const auth = requireAuth(['patient']);
-    if (auth.error) {
-      return new Response(JSON.stringify(auth.error), { status: auth.status });
-    }
+    // ✅ Await and pass role
+    const user = await requireAuth('patient');
 
     const { slotId } = await req.json();
     if (!slotId) {
@@ -28,9 +26,9 @@ export async function POST(req) {
       );
     }
 
-    // Create booking
+    // ✅ Use user.userId directly
     await Booking.create({
-      userId: auth.user.userId,
+      userId: user.userId,
       slotId
     });
 
