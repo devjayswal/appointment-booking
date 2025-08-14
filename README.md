@@ -34,3 +34,33 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+## Test Commands 
+
+user registreation 
+
+
+curl -X POST http://localhost:3000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Doe", "email": "john@example.com", "password": "Passw0rd!"}'
+post data 
+{
+  "message": "Registration successful",
+  "userId": "66b9c8..."
+}
+
+
+login user
+
+curl -X POST http://localhost:3000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "admin@example.com", "password": "Passw0rd!"}' \
+  -i
+
+see all bookings  as a admin 
+
+curl -X GET http://localhost:3000/api/all-bookings \
+  -b "token=<YOUR_ADMIN_JWT>"
