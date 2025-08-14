@@ -1,4 +1,6 @@
 import './globals.css';
+import Link from 'next/link';
+
 export const metadata = {
   title: 'Clinic Appointments',
   description: 'Minimal appointment booking',
@@ -12,9 +14,9 @@ export default function RootLayout({ children }) {
         <header className="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
           <h1 className="text-2xl font-bold text-purple-700">Clinic Appointments</h1>
           <nav className="space-x-4">
-            <a href="/" className="hover:text-purple-500 transition-colors">Home</a>
-            <a href="/appointments" className="hover:text-purple-500 transition-colors">Appointments</a>
-            <a href="/about" className="hover:text-purple-500 transition-colors">About</a>
+            <Link href="/" className="hover:text-purple-500 transition-colors">Home</Link>
+            <Link href="/appointments" className="hover:text-purple-500 transition-colors">Appointments</Link>
+            <Link href="/about" className="hover:text-purple-500 transition-colors">About</Link>
           </nav>
         </header>
 
